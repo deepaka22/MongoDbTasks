@@ -1,0 +1,71 @@
+1. Find all the information about each products
+
+  db.products.find().forEach((ele)=>{
+        print( "name: " + ele.product_name + ",price:" + ele.product_price 
+        + ", material: " + ele.product_material + ", Color: " + ele.product_color + ".")
+    })
+
+2. Find the product price which are between 400 to 800
+
+   db.newproducts.find({product_price : {$lte : 800.00, $gte : 400.00 }})
+
+3. Find the product price which are not between 400 to 600
+  
+db.products.find({product_price : {$not :{$lte : 400.00, $gte : 600.00 }}})
+
+4. List the four product which are grater than 500 in price
+
+db.products.find({product_price : {$gte : 500.00 }}).limit(2)
+
+5.Find the product name and product material of each products
+
+db.products.find().forEach((ele)=>{
+        print( "Product_name: " + ele.product_name + ", material: " + ele.product_material +".")
+      })
+6. Find the product with a row id of 10
+
+ db.products.find({id:'10'})
+
+7.Find only the product name and product material
+
+db.products.find().forEach((ele)=>{
+            print ("product name: " + ele.product_name + " & " + "Material: " + ele.product_material )
+        })
+
+8. Find all products which contain the value of soft in product material
+
+db.products.find({product_material :"Soft" })
+
+9. Find products which contain product color indigo  and product price 492.00
+
+(i).db.products.find({$and: [{product_color : "indigo"}, {product_price : 911.00}]})
+
+(ii). db.products.find({$or: [{product_color : "indigo"}, {product_color : "black"}]})
+   
+(iii). db.newproducts.aggregate([{
+    $match: {
+        product_color: "indigo",
+    }},
+    {
+    $match: {
+        product_price: 492.00
+    }
+    },
+    { $group: {
+        _id:"$product_name"
+    }
+    
+   }])
+
+10.Delete the products which product price value are same
+
+db.divipro.aggregate([{
+  $group : {_id : "$product_price",
+    duplicates: {$addToSet: "$_id"},
+  count : {$sum: 1}  }},
+  {$match : {count : {$gt : 1}}}, ]).forEach((ele)=>{
+    ele.duplicates.shift();
+    db.divipro.deleteMany({_id: {$in : ele.duplicates}});
+  })
+
+  
