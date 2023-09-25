@@ -1,0 +1,92 @@
+db.company_drive.insertMany([
+     
+       {
+         id: 1,
+         name: "Paripoorna",
+         date: ISODate("2020-10-14"),
+      },
+      {
+         id: 2,
+         name: "Domainter",
+         date: ISODate("2020-10-16")
+      },
+      {
+         id: 3,
+         name: "Solix",
+         date: ISODate("2020-10-17")
+      },
+      {
+        id: 4,
+        name: "Solix",
+        date: ISODate("2020-10-18")
+     },
+     {
+        id: 5,
+        name: "Solix",
+        date: ISODate("2020-10-20")
+     },
+     {
+        id: 6,
+        name: "HCL technologies",
+        date: ISODate("2020-10-21")
+     }]
+   
+)
+
+2. db.company_drive.find({date: {$gte: ISODate("2020-10-15"), $lte : ISODate("2020-10-30")}})
+
+
+4. db.usersInfo.insertMany([
+    {
+             id : '1',
+        userName: "Meganathan",
+        codekata : "70%",
+        attendance: "present",
+        placement: "appeared",
+        mentors: "sanjay",     
+    },
+    {
+        id : '2',
+   userName: "Yogesh",
+   codekata : "80%",
+   attendance: "present",
+   placement: "appeared",
+   mentors: "Raghav",     
+},
+{
+    id : '3',
+userName: "Nikesh",
+codekata : "60%",
+attendance: "absent",
+placement: "notAppeared",
+mentors: "sanjay",     
+},
+{
+    id : '4',
+userName: "Arjun",
+codekata : "50%",
+attendance: "absent",
+placement: "notAppeared",
+mentors: "Raghav",     
+},
+{
+    id : '5',
+userName: "Arun",
+codekata : "70%",
+attendance: "present",
+placement: "appeared",
+mentors: "sanjay",     
+},
+{
+    id : '6',
+userName: "Kovinathan",
+codekata : "70%",
+attendance: "present",
+placement: "appeared",
+mentors: "Raghav",     
+}
+])
+
+4 . db.usersInfo.find().forEach((ele)=>{
+   print ( ele.userName + " codedkata solved: " + ele.codekata)
+});
